@@ -17,3 +17,18 @@ const submitHandler = async (e) => {
 }
 
 document.querySelector("#js-form").addEventListener("submit",(e) => submitHandler(e));
+
+// ランダムボタンのハンドラー関数
+const randomHandler = async () => {
+    // 1〜1000のランダムなIDを生成
+    const randomId = Math.floor(Math.random() * 1000) + 1;
+//     // APIからデータを取得（既存の関数を流用）
+    const pokemonData = await getPokemonData(randomId.toString());  // IDを文字列に変換
+    if (pokemonData) {  // データがある場合のみ処理
+        const extractedData = extractData(pokemonData);
+        showData(extractedData);
+    }
+}
+
+ // ランダムボタンにイベントリスナーを追加
+document.querySelector("[data-button]").addEventListener("click", randomHandler);
